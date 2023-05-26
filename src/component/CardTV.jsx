@@ -88,7 +88,7 @@ export default function Card() {
           <div className={!state.isLogin || state.user.is_admin? "mt-5 pt-5" : "mt-5"}>
             <h3 className="fw-bold text-light">TV Show</h3>
           </div>
-          <div className="d-flex justify-content-start mt-4 " id="wrap">
+          <div className="d-flex justify-content-between" id="wrap">
             {filteredFilms?.map((item) => {
               return (
                 <>
