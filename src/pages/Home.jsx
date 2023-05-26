@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
     <Navbar />
-
+    <Jumbotron  />
     {!state.isLogin || state.user.is_admin ? null :  (
       <Jumbotron  />
     )}
