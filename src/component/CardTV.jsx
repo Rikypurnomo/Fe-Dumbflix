@@ -12,7 +12,7 @@ export default function Card() {
   const [state, dispatch] = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [categoryId, setCategoryId] = useState(1);
+  const [categoryId, setCategoryId] = useState(2);
   
   const [ascFilms, setAscFilms] = useState([]);
   const [filteredFilms, setFilteredFilms] = useState([]);
@@ -78,9 +78,6 @@ export default function Card() {
   }, [isLoading]);
 
   
-
-
-
 
 
   return (

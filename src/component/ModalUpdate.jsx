@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 
 
-export default function Updates(props) {
+export default function Updates() {
     let navigate = useNavigate();
     const [state] = useContext(UserContext);
     const [imageUrl, setImageUrl] = useState(Profile)
@@ -66,8 +66,9 @@ export default function Updates(props) {
             icon: "success",
             title: "Update Photo Success",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1000,
           });
+   
         } catch (error) {
           console.log(error);
         }

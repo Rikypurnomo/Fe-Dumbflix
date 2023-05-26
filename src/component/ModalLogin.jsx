@@ -42,7 +42,7 @@ export const ModalLogin = (props) => {
 
       // Status check
       if (response.data.data.is_admin === true) {
-        Navigate("/tabletransaction");
+        Navigate("/");
       } else {
         Navigate("/");
       }
@@ -52,6 +52,10 @@ export const ModalLogin = (props) => {
         title: "Login Success",
         showConfirmButton: false,
         timer: 1500,
+      });
+      setFormLogin({
+        email: "",
+        password: "",
       });
     } catch (error) {
       Swal.fire({

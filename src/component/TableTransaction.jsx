@@ -11,7 +11,7 @@ export default function TableTransactions() {
   });
   return (
     <Container className="mt-5 pt-5">
-      <h2 className="mb-4 text-light fw-semibold" style={{ background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Income Transaction</h2>
+      <h2 className="mb-4 text-light fw-semibold">Income Transaction</h2>
       <Table
         striped
         bordered
@@ -41,11 +41,11 @@ export default function TableTransactions() {
                   <td>{item.user.fullname}</td>
                   <td>{item.user.phone}</td>
                   <td>{item.duedate}</td>
-                  {/* <td>
+                  <td>
                     {item.user.subscribe !== "" &&
                     item.user.subscribe !== "false"
-                      ? "Inactive"
-                      : "Active"}
+                      ? "Active"
+                      : "InActive"}
                   </td>
                   {item.status === "pending" && (
                     <td
@@ -70,10 +70,7 @@ export default function TableTransactions() {
                     >
                       {item.status}
                     </td>
-                  )} */}
-
-                  <td>{item.status}</td>
-                  <td>{item.user.subscribe}</td>
+                  )}
                 </tr>
               </>
             );

@@ -2,8 +2,7 @@ import {useContext, useState } from "react";
 import {  Container } from "react-bootstrap";
 import { useQuery, queryCache } from "react-query";
 import { Link, NavLink } from "react-router-dom";
-// import EditFilm from "../component/EditFilm";
-import UpdateMovies from "../component/UpdateMovies";
+import EditFilm from "../component/EditFilm";
 import { API, setAuthToken } from "../config/api";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
@@ -13,7 +12,7 @@ export default function Card() {
   const [state, dispatch] = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [categoryId, setCategoryId] = useState(2);
+  const [categoryId, setCategoryId] = useState(1);
   const [idFilmToDelete, setIdFilmToDelete] = useState(null);
   const [ascFilms, setAscFilms] = useState([]);
   const [filteredFilms, setFilteredFilms] = useState([]);
@@ -201,7 +200,7 @@ export default function Card() {
           </div>
         </>
       </Container>
-      <UpdateMovies show={showModal} onHide={() => setShowModal(false)} selectedFilm={selectedFilm} onSave={handleEditFilm}/>
+      <EditFilm show={showModal} onHide={() => setShowModal(false)} selectedFilm={selectedFilm} onSave={handleEditFilm}/>
     </>
   );
 }

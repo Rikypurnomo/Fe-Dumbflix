@@ -8,10 +8,7 @@ import AddMovie from "./pages/AddMovies";
 import Detail from "./pages/DetailCards";
 import Payment from "./pages/Payment";
 import "./App.css";
-import ListFilms from "./pages/ListFilms";
-import UpdateMovie from "./pages/UpdateMovie";
-import AddEpisod from "./pages/AddEpisod";
-import UpdateEpisod from "./pages/UpdateEpisod";
+import UpdateFilm from "./pages/UpdateFIlm";
 // import { AdminRoute, UserRoute } from "./component/PrivateRoute";
 
 
@@ -23,15 +20,12 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/tvshows" element={<TvShow />} />
             <Route path="/addmovies" element={<AddMovie />} />
-            <Route path="/listfilms" element={<ListFilms/>} />
-            <Route path="/updatemovie/:id" element={<UpdateMovie/>} />
-            <Route path="/addepisod" element={<AddEpisod/>} />
-            <Route path="/updateepisod" element={<UpdateEpisod/>} />
             <Route path="/tabletransaction" element={<TableTransaction />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/updatefilm" element={<UpdateFilm />} />
         </Routes>
       </div>
     </>

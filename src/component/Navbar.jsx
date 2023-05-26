@@ -1,28 +1,29 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
-  Nav,
-  Navbar,
   Container,
+  Nav,
   NavDropdown,
+  Navbar,
   Stack,
 } from "react-bootstrap";
-import ModalLogin from "./ModalLogin";
-import Profile from "../assets/image/Profile.png";
-import Logo from "../assets/image/LogoDumbflix.png";
-import Clip from "../assets/image/Clip.png";
-import Transaction from "../assets/image/Transaction.png";
-import Admin from "../assets/image/Admin.png";
-import User from "../assets/image/IconUser.png";
-import Pay from "../assets/image/Pay.png";
-import Logout from "../assets/image/Logout.png";
-import ModalRegister from "./ModalRegister";
-import { UserContext } from "../context/userContext";
-import { API, setAuthToken } from "../config/api";
 import { useQuery } from "react-query";
+import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Admin from "../assets/image/Admin.png";
+import UserProfile from "../assets/image/BlankProfile.jpg";
+import Clip from "../assets/image/Clip.png";
+import User from "../assets/image/IconUser.png";
+import Logo from "../assets/image/LogoDumbflix.png";
+import Logout from "../assets/image/Logout.png";
+import Pay from "../assets/image/Pay.png";
+import Transaction from "../assets/image/Transaction.png";
+import { API, setAuthToken } from "../config/api";
+import { UserContext } from "../context/userContext";
 import "../index.css";
+import ModalLogin from "./ModalLogin";
+import ModalRegister from "./ModalRegister";
+// import { Link } from "react-router-dom";
 
 export default function Header() {
   let navigate = useNavigate();
@@ -31,18 +32,18 @@ export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
-  let { data: profile } = useQuery("profileCache", async () => {
-    const response = await API.get(`/profiles`);
+  let { data: profile } = useQuery("profileCachewww", async () => {
+    const response = await API.get(`/profile`);
     return response.data.data;
   });
 
   useEffect(() => {
-    
+    // Redirect Auth but just when isLoading is false
     if (!isLoading) {
-      
+      console.log("apa")
       if (state.isLogin === false) {
-        
-        
+        console.log("s")
+        // navigate("/");
       }
     }
   }, [isLoading]);
@@ -51,13 +52,13 @@ export default function Header() {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
       checkUser();
-      
+      console.log("User")
     } else {
       setIsLoading(false);
     }
   }, []);
 
-  const checkUser = async () => {
+  const checkUser =  async () => {
     try {
       const response = await API.get("/check-auth");
       // Get user data
@@ -99,7 +100,7 @@ export default function Header() {
     });
     Swal.fire({
       position: "center",
-      icon: "success",
+      icon: "warning",
       title: "Logout Success",
       showConfirmButton: false,
       timer: 1500,
@@ -113,7 +114,7 @@ export default function Header() {
 
   function homeLogoHandler() {
     navigate("/");
-    window.location.reload();
+    // window.location.reload();
   }
 
   function tvHandler(e) {
@@ -127,224 +128,218 @@ export default function Header() {
   }
 
   return (
-    
+
     <>
-    {isLoading? null:
-    (
-      <><Navbar
-      style={{ backgroundColor: "#1F1F1F" }}
-      className="fixed-top"
-      expand="lg"
-    >
-      <Container>
-        <Navbar.Collapse>
-          {state.isLogin === true ? (
-            state.user.is_admin === true ? (
-              <>
-                <Nav className="justify-content-center">
-                  <img role={"button"} onClick={homeLogoHandler} src={Logo} width="100px" alt="Logo" />
-                </Nav>
-                <Nav className="ms-auto gap-3">
-                  <NavDropdown
-                    menuVariant="dark"
-                    align="end"
-                    title={
-                      <img src={Admin} width="30px" height="30px" alt="" />
-                    }
-                  >
-                    <NavDropdown.Item href="/addmovies">
-                      <img
-                        src={Clip}
-                        width="20px"
-                        height="20px"
-                        alt="Clip"
-                      ></img>
-                      <span className="ms-2 text-light fw-semibold">
-                        Add Film
-                      </span>
-                    </NavDropdown.Item>
-                    
-                    <NavDropdown.Item href="/listfilms">
-                      <img
-                        src={Clip}
-                        width="20px"
-                        height="20px"
-                        alt="Clip"
-                      ></img>
-                      <span className="ms-2 text-light fw-semibold">
-                        List Film
-                      </span>
-                    </NavDropdown.Item>
+      {isLoading ? null :
+        (
+          <><Navbar
+            style={{ backgroundColor: "#1F1F1F",display:"flex",justifyContent:"center" }}
+            className="fixed-top"
+       
+          >
+            <Container className="mx-0 d-flex">
+              <Navbar.Collapse>
+                {state.isLogin === true ? (
+                  state.user.is_admin === true ? (
+                    <>
+                      <Nav className="justify-content-center">
+                        <img role={"button"} onClick={homeLogoHandler} src={Logo} width="100px" alt="Logo" />
+                      </Nav>
+                      <Nav className="ms-auto gap-3">
+                        <NavDropdown
+                          menuVariant="dark"
+                          align="end"
+                          title={
+                            <img src={Admin} width="30px" height="30px" alt="" />
+                          }
+                        >
+                          <NavDropdown.Item>
+                            <Link to="/addmovies">
+                            <img
+                              src={Clip}
+                              width="20px"
+                              height="20px"
+                              alt="Clip"
+                            ></img>
+                            <span className="ms-2 text-light fw-semibold">
+                              Add Film
+                            </span>
+                            </Link>
+                          </NavDropdown.Item>
 
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/tabletransaction">
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item>
+                            <Link to="/tabletransaction">
+                            <img
+                              src={Transaction}
+                              width="20px"
+                              height="20px"
+                              alt="Clip"
+                            ></img>
+                            <span className="ms-2 text-light fw-semibold">
+                              Income Transaction
+                            </span>
+                            </Link>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item onClick={logout}>
+                            <img
+                              src={Logout}
+                              width="20px"
+                              height="20px"
+                              alt="Logout"
+                            ></img>
+                            <span className="ms-2 text-light fw-semibold">
+                              Logout
+                            </span>
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                      </Nav>
+                    </>
+                  ) : (
+                    <>
+                      <Nav>
+                        <Nav.Link onClick={homeHandler} className="text-light">
+                          Home
+                        </Nav.Link>
+                        <Nav.Link onClick={tvHandler} className="text-light">
+                          TV Shows
+                        </Nav.Link>
+                        <Nav.Link onClick={moviesHandler} className="text-light">
+                          Movies
+                        </Nav.Link>
+                      </Nav>
+                      <Nav className="justify-content-center">
+                        <img
+                          type="submit"
+                          src={Logo}
+                          onClick={homeLogoHandler}
+                          style={{ marginLeft: "400px" }}
+                          width="100px"
+                          alt="Logo"
+                        />
+                      </Nav>
+                      <Nav className="">
+                        <NavDropdown
+                          menuVariant="dark"
+                          align="end"
+                          title={
+                            <img
+                              src={profile?.photo ? profile.photo : UserProfile}
+                              className="rounded-circle"
+                              style={{ objectFit: "cover" }}
+                              width="40px"
+                              height="40px"
+                              alt="Profile"
+                            />
+                          }
+                        >
+                          <NavDropdown.Item>
+                            <Link to="/profile">
+                              <img src={User} width="20px" height="20px" alt=""></img>
+                              <span className="ms-2 text-light fw-semibold">
+                                Profile
+                              </span>
+                            </Link>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item>
+                            <Link to="/payment">
+                              <img src={Pay} width="20px" height="20px" alt=""></img>
+                              <span className="ms-2 text-light fw-semibold">Pay</span>
+                            </Link>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item onClick={logout}>
+                            <img
+                              src={Logout}
+                              width="20px"
+                              height="20px"
+                              alt=""
+                            ></img>
+                            <span className="ms-2 text-light fw-semibold">
+                              Logout
+                            </span>
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                      </Nav>
+                    </>
+                  )
+                ) : (
+                  <>
+                    <Nav className="pt-2 pb-2" style={{ marginLeft: "-5px" }}>
+                      <Nav.Link onClick={homeHandler} className="text-light">
+                        Home
+                      </Nav.Link>
+                      <Nav.Link onClick={tvHandler} className="text-light">
+                        TV Shows
+                      </Nav.Link>
+                      <Nav.Link onClick={moviesHandler} className="text-light">
+                        Movies
+                      </Nav.Link>
+                    </Nav>
+                    <Nav className="justify-content-center">
                       <img
-                        src={Transaction}
-                        width="20px"
-                        height="20px"
-                        alt="Clip"
-                      ></img>
-                      <span className="ms-2 text-light fw-semibold">
-                        Income Transaction
-                      </span>
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={logout}>
-                      <img
-                        src={Logout}
-                        width="20px"
-                        height="20px"
-                        alt="Logout"
-                      ></img>
-                      <span className="ms-2 text-light fw-semibold">
-                        Logout
-                      </span>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </>
-            ) : (
-              <>
-                <Nav>
-                  <Nav.Link onClick={homeHandler} className="text-light">
-                    Home
-                  </Nav.Link>
-                  <Nav.Link onClick={tvHandler} className="text-light">
-                    TV Shows
-                  </Nav.Link>
-                  <Nav.Link onClick={moviesHandler} className="text-light">
-                    Movies
-                  </Nav.Link>
-                  
-                </Nav>
-                <Nav className="justify-content-center">
-                  <img
-                    type="submit"
-                    src={Logo}
-                    onClick={homeLogoHandler}
-                    style={{ marginLeft: "400px" }}
-                    width="100px"
-                    alt="Logo"
-                  />
-                </Nav>
-                <Nav className="ms-auto">
-                  <NavDropdown
-                    menuVariant="dark"
-                    align="end"
-                    title={
-                      <img
-                        src={ profile?.photo ? `${profile.photo}` : Profile}
-
-                        className="rounded-circle "
-                        style={{ objectFit: "cover" }}
-                        width="40px"
-                        height="40px"
-                        alt="Profile"
+                        type="submit"
+                        src={Logo}
+                        onClick={homeLogoHandler}
+                        style={{ marginLeft: "380px" }}
+                        width="100px"
+                        alt="Logo"
                       />
-                    }
-                  >
-                    <NavDropdown.Item href="/profile">
-                      <img src={User} width="20px" height="20px" alt=""></img>
-                      <span className="ms-2 text-light fw-semibold">
-                        Profile
-                      </span>
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/payment">
-                      <img src={Pay} width="20px" height="20px" alt=""></img>
-                      <span className="ms-2 text-light fw-semibold">Pay</span>
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={logout}>
-                      <img
-                        src={Logout}
-                        width="20px"
-                        height="20px"
-                        alt=""
-                      ></img>
-                      <span className="ms-2 text-light fw-semibold">
-                        Logout
-                      </span>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </>
-            )
-          ) : (
-            <>
-              <Nav className="pt-2 pb-2" style={{ marginLeft: "-5px" }}>
-                <Nav.Link onClick={homeHandler} className="text-light">
-                  Home
-                </Nav.Link>
-                <Nav.Link onClick={tvHandler} className="text-light">
-                  TV Shows
-                </Nav.Link>
-                <Nav.Link onClick={moviesHandler} className="text-light">
-                  Movies
-                </Nav.Link>
-              </Nav>
-              <Nav className="justify-content-center">
-                <img
-                  type="submit"
-                  src={Logo}
-                  onClick={homeLogoHandler}
-                  style={{ marginLeft: "380px" }}
-                  width="100px"
-                  alt="Logo"
-                />
-              </Nav>
-              <Nav className="ms-auto">
-                <Stack direction="horizontal" gap={3}>
-                  <Button
-                    onClick={handleShowRegister}
-                    style={{
-                      backgroundColor: "white",
-                      color: "#E50914",
-                      paddingLeft: "15px",
-                      paddingRight: "15px",
-                      paddingTop: "1px",
-                      paddingBottom: "1px",
-                      border: "2px solid white",
-                    }}
-                    size="sm"
-                  >
-                    Register
-                  </Button>
-                  <Button
-                    onClick={handleShowLogin}
-                    style={{
-                      backgroundColor: "#E50914",
-                      paddingLeft: "25px",
-                      paddingRight: "25px",
-                      paddingTop: "1px",
-                      paddingBottom: "1px",
-                      border: "2px solid #E50914",
-                    }}
-                    size="sm"
-                  >
-                    Login
-                  </Button>
-                </Stack>
-              </Nav>
-            </>
-          )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+                    </Nav>
+                    <Nav className="">
+                      <Stack direction="horizontal" gap={3}>
+                        <Button
+                          onClick={handleShowRegister}
+                          style={{
+                            backgroundColor: "white",
+                            color: "#E50914",
+                            paddingLeft: "15px",
+                            paddingRight: "15px",
+                            paddingTop: "1px",
+                            paddingBottom: "1px",
+                            border: "2px solid white",
+                          }}
+                          size="sm"
+                        >
+                          Register
+                        </Button>
+                        <Button
+                          onClick={handleShowLogin}
+                          style={{
+                            backgroundColor: "#E50914",
+                            paddingLeft: "25px",
+                            paddingRight: "25px",
+                            paddingTop: "1px",
+                            paddingBottom: "1px",
+                            border: "2px solid #E50914",
+                          }}
+                          size="sm"
+                        >
+                          Login
+                        </Button>
+                      </Stack>
+                    </Nav>
+                  </>
+                )}
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
 
-    <ModalLogin
-      show={showLogin}
-      onHide={handleClose}
-      onClick={handleShowRegister}
-    />
-    <ModalRegister
-      show={showRegister}
-      onHide={handleClose}
-      onClick={handleShowLogin}
-    />
-    </> 
-    )}
-      
+            <ModalLogin
+              show={showLogin}
+              onHide={handleClose}
+              onClick={handleShowRegister}
+            />
+            <ModalRegister
+              show={showRegister}
+              onHide={handleClose}
+              onClick={handleShowLogin}
+            />
+          </>
+        )}
+
     </>
   );
 }

@@ -7,64 +7,66 @@ import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 
 
-function AddEpisodeModal({ isOpen, closeModal ,refetch}) {
-  const [addEpisode, setAddEpisode] = useState({});
+function AddEpisodeModal({ isOpen, closeModal,refetch }) {
+  const [addFilms, setAddFilms] = useState({});
   const {id} = useParams()
   function handleSubmit(event) {
     event.preventDefault();
+    closeModal();
   }
+console.log(addFilms)
   const handleChange = (e) => {
-    setAddEpisode({
-      ...addEpisode,
+    setAddFilms({
+      ...addFilms,
       [e.target.name]:
-      e.target.type === "file" ? e.target.files : e.target.value,
+        e.target.type === "file" ? e.target.files : e.target.value,
     });
   };
-  
+
   const addButtonHandler = useMutation(async (e) => {
-    closeModal();
     try {
       e.preventDefault();
-      
+
       const config = {
         headers: {
           "Content-type": "multipart/form-data",
         },
       };
-      
+
       // console.log(form);
-      
+
       const formData = new FormData();
-      formData.set("title", addEpisode.title);
-      formData.set("linkfilm", addEpisode.linkfilm);
+      formData.set("title", addFilms.title);
+      formData.set("linkfilm", addFilms.linkfilm);
       formData.set("film_id", id)
       formData.set(
         "thumbnailfilm",
-        addEpisode?.thumbnailfilm[0],
-        addEpisode?.thumbnailfilm[0]?.name  
-        );
-        
-        console.log(formData);
-        // Configuration Content-type
-        
-        // Insert data user to database
-        const response = await API.post("/episode", formData, config);
-        console.log("add episode success : ", response);
-        
-        
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Add Episode Success",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        addFilms?.thumbnailfilm[0],
+        addFilms?.thumbnailfilm[0]?.name  
+      );
+
+      console.log(formData);
+      // Configuration Content-type
+
+      // Insert data user to database
+      const response = await API.post("/episode", formData, config);
+      console.log("add episode success : ", response);
+
+      
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Add Film Success",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      closeModal(true)
       refetch()
     } catch (error) {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "Add Episode Failed",
+        title: "Add Film Failed",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -85,7 +87,7 @@ function AddEpisodeModal({ isOpen, closeModal ,refetch}) {
       borderRadius: "5px",
       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
       padding: "20px",
-      background: "#4285f4",
+      background: "#343a40",
     },
     overlay: {
       background: "rgba(0, 0, 0, 0.5)",

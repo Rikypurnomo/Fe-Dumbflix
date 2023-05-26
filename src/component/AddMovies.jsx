@@ -19,7 +19,7 @@ function AdminAddMovies() {
 
   const [addFilms, setAddFilms] = useState({});
 
-  let { data: categories } = useQuery("categoriesCache", async () => {
+  let { data: categories, refetch } = useQuery("categoriesCache", async () => {
     const response = await API.get("/categories");
     return response.data.data;
   });
@@ -85,6 +85,7 @@ function AdminAddMovies() {
         showConfirmButton: false,
         timer: 2000,
       });
+      
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -103,8 +104,7 @@ function AdminAddMovies() {
       onSubmit={(e) => addButtonHandler.mutate(e)}
     >
       <h4 className="text-light fw-semibold mb-4">Add Film</h4>
-      <Row className="mb-3 formInputMovies">
-        <Col xs={9}>
+      <Form.Group className="mb-3 formInputMovies">
           <Form.Control
             className="formInputMovies"
             placeholder="Title"
@@ -117,41 +117,7 @@ function AdminAddMovies() {
             name="title"
             onChange={handleChange}
           />
-        </Col>
-        <Col>
-          <Form.Group
-            style={{
-              backgroundColor: "rgba(210, 210, 210, 0.25)",
-              border: "2px solid #D2D2D2",
-              borderRadius: 8,
-              width: 270,
-              height: 40,
-            }}
-          >
-            <Form.Label className="d-flex">
-              <div className="d-flex justify-content-between align-text-center">
-                <Form.Control
-                  name="thumbnailfilm"
-                  type="file"
-                  hidden
-                  placeholder="Attachment"
-                  cursor="pointer"
-                  onChange={handleChange}
-                />
-                <p
-                  className="ms-3"
-                  style={{ color: "#B1B1B1", marginTop: "7px" }}
-                >
-                  Attach Thumbnail
-                </p>
-                <div style={{ marginLeft: "75px", marginTop: "5px" }}>
-                  <img src={Attachment} width="15px" alt="Attachment" />
-                </div>
-              </div>
-            </Form.Label>
-          </Form.Group>
-        </Col>
-      </Row>
+      </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Control
@@ -174,12 +140,12 @@ function AdminAddMovies() {
           style={{
             color: "#B1B1B1",
             backgroundColor: "rgba(210, 210, 210, 0.25)",
-            border: "2px solid 	#BDB76B",
+            border: "2px solid #D2D2D2",
           }}
           name="category_id"
           onChange={handleChange}
         >
-          <option hidden>Category</option>
+          <option hidden>Genre</option>
           {categories?.map((item) => (
             <option value={item?.id}>{item?.name}</option>
           ))}
@@ -216,6 +182,38 @@ function AdminAddMovies() {
           onChange={handleChange}
         />
       </Form.Group>
+      <Form.Group
+            style={{
+              backgroundColor: "rgba(210, 210, 210, 0.25)",
+              border: "2px solid #D2D2D2",
+              borderRadius: 8,
+              width: 270,
+              height: 40,
+            }}
+          >
+            <Form.Label className="d-flex">
+              <div className="d-flex justify-content-between align-text-center">
+                <Form.Control
+                  name="thumbnailfilm"
+                  type="file"
+                  hidden
+                  placeholder="Attachment"
+                  cursor="pointer"
+                  onChange={handleChange}
+                />
+                <p
+                  className="ms-3"
+                  style={{ color: "#B1B1B1", marginTop: "7px" }}
+                >
+                  Attach Thumbnail
+                </p>
+                <div style={{ marginLeft: "75px", marginTop: "5px" }}>
+                  <img src={Attachment} width="15px" alt="Attachment" />
+                </div>
+              </div>
+            </Form.Label>
+          </Form.Group>
+
       <div className="d-flex flex-row-reverse">
         <Button
           className="border-0 fw-bold pe-5 ps-5 bd-highlight"

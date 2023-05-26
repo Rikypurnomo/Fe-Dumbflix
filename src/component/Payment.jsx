@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { API } from "../config/api";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { FaBell, FaFilm, FaPlayCircle, FaReplyAll } from "react-icons/fa";
 
 export default function Payments() {
   const navigate = useNavigate();
@@ -65,66 +64,51 @@ export default function Payments() {
       <Container>
         <Row>
           <Col className="mt-5 pt-5" style={{ textAlign: "center" }}>
-          <h1 className="mt-5 mb-4 text-white fw-bold" style={{ fontSize: "48px", letterSpacing: "2px" }}>Premium </h1>
-
-          <p className="text-white fs-5" style={{ lineHeight: "2", maxWidth: "500px", margin: "0 auto" }}>
-            Bayar Sekarang dan Nikmati streaming film-film yang kekinian dari{" "}
-            <span className="fw-bold" style={{ color: "#E50914" }}> DUMBFLIX </span>
-          </p>
-
-          <p style={{ marginTop: "20px", marginBottom: "0" }}>
-            <span className="fw-bold fs-5" style={{ color: "#E50914" }}>
-              DUMBFLIX :{" "}
-            </span>
-            <span className="fw-bold text-white fs-5">0981119181</span>
-          </p>
+            <h1 className="mt-5 mb-4 text-white fw-bold">Premium</h1>
+            <p className="text-white fs-5">
+              Bayar Sekarang dan Nikmati streaming film-film yang kekinian dari{" "}
+              <span className="fw-bold" style={{ color: "#E50914" }}>
+                DUMBFLIX
+              </span>
+            </p>
+            <p>
+              <span className="fw-bold fs-5" style={{ color: "#E50914" }}>
+                DUMBFLIX :{" "}
+              </span>
+              <span className="fw-bold text-white fs-5">0981119181</span>
+            </p>
           </Col>
           </Row>
-          <Row className="w-20 m-auto" style={{ marginTop: "50px" }}>
+          <Row className="w-50 m-auto">
         <Col md={3} sm={6} xs={12}>
-          <Card className="py-2 bg-black border" style={{borderRadius:"10px"}}>
-            <Card.Body className="text-light m-auto ">
-              <Card.Title className="text-success" style={{ fontSize: "36px", fontWeight: "bold" }}>30K  <FaBell className="text-danger"/></Card.Title>
-              <Card.Text style={{ fontSize: "18px", fontWeight: "bold" }}>1 Month</Card.Text>
-              <Card.Text>1 bulan Premium, Rp30.000.</Card.Text>
-              <Card.Text type="submit"
-            onClick={() => handleSubmit.mutate({ price: 30000, days: 30 })} className="text-white text-center py-2 bg-danger" style={{ borderRadius: "20px", cursor: "pointer" }} > <FaPlayCircle/>Langganan</Card.Text>
+          <Card type="submit" onClick={() => handleSubmit.mutate({price:30000,days:30})} className="py-5 bg-black border">
+            <Card.Body className="text-light m-auto">
+              <Card.Title>30K</Card.Title>
+              <Card.Text>1 Month</Card.Text>
             </Card.Body>
           </Card>
         </Col>
-
         <Col md={3} sm={6} xs={12}>
-          <Card className="py-2 bg-black border" style={{borderRadius:"10px"}}>
-            <Card.Body className="text-light m-auto ">
-              <Card.Title className="text-success" style={{ fontSize: "36px", fontWeight: "bold" }}>80K  <FaBell className="text-danger"/></Card.Title>
-              <Card.Text style={{ fontSize: "18px", fontWeight: "bold" }}>3 Month</Card.Text>
-              <Card.Text>3 bulan Premium, Rp80.000.</Card.Text>
-              <Card.Text type="submit"
-            onClick={() => handleSubmit.mutate({ price: 30000, days: 30 })} className="text-white text-center py-2 bg-danger" style={{ borderRadius: "20px", cursor: "pointer" }} > <FaPlayCircle/>Langganan</Card.Text>
+          <Card type="submit" onClick={() => handleSubmit.mutate({price:80000,days:90})} className="py-5 bg-black border">
+            <Card.Body className="text-light m-auto">
+              <Card.Title>80K</Card.Title>
+              <Card.Text>3 Month</Card.Text>
             </Card.Body>
           </Card>
         </Col>
-
         <Col md={3} sm={6} xs={12}>
-          <Card className="py-2 bg-black border" style={{borderRadius:"10px"}}>
-            <Card.Body className="text-light m-auto ">
-              <Card.Title className="text-success" style={{ fontSize: "36px", fontWeight: "bold" }}>150K  <FaBell className="text-danger"/></Card.Title>
-              <Card.Text style={{ fontSize: "18px", fontWeight: "bold" }}>6 Month</Card.Text>
-              <Card.Text>6 bulan Premium, Rp150.000.</Card.Text>
-              <Card.Text type="submit"
-            onClick={() => handleSubmit.mutate({ price: 30000, days: 30 })} className="text-white text-center py-2 bg-danger" style={{ borderRadius: "20px", cursor: "pointer" }} > <FaPlayCircle/>Langganan</Card.Text>
+          <Card type="submit" onClick={() => handleSubmit.mutate({price:150000,days:180})} className="py-5 bg-black border">
+            <Card.Body className="text-light m-auto">
+              <Card.Title>150K</Card.Title>
+              <Card.Text>6 Month</Card.Text>
             </Card.Body>
           </Card>
         </Col>
-
         <Col md={3} sm={6} xs={12}>
-          <Card className="py-2 bg-transparent border" style={{borderRadius:"10px"}}>
-            <Card.Body className="text-light m-auto ">
-              <Card.Title className="text-success" style={{ fontSize: "36px", fontWeight: "bold" }}>300K  <FaBell className="text-danger"/></Card.Title>
-              <Card.Text style={{ fontSize: "18px", fontWeight: "bold" }}>12 Month</Card.Text>
-              <Card.Text>12 bulan Premium, Rp300.000.</Card.Text>
-              <Card.Text type="submit"
-            onClick={() => handleSubmit.mutate({ price: 30000, days: 30 })} className="text-white text-center py-2 bg-danger" style={{ borderRadius: "20px", cursor: "pointer" }} > <FaPlayCircle/>Langganan</Card.Text>
+          <Card type="submit" onClick={() => handleSubmit.mutate({price:300000,days:360})} className="py-5 bg-black border">
+            <Card.Body className="m-auto text-light">
+              <Card.Title>300K</Card.Title>
+              <Card.Text>12 Month</Card.Text>
             </Card.Body>
           </Card>
         </Col>
